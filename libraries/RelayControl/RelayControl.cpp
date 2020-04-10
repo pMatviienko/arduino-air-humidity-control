@@ -46,7 +46,7 @@ bool RelayControl::isOn() {
 
 void RelayControl::setup() {
     pinMode(_pin, OUTPUT);
-    digitalWrite(_pin, LOW);
+    digitalWrite(_pin, HIGH);
 }
 
 void RelayControl::loop() {
@@ -86,9 +86,9 @@ void RelayControl::_calculateSwitch(){
 
 void RelayControl::_controlRelay(){
     if(_isOn || _isForceOn){
-        digitalWrite(_pin, HIGH);
+        digitalWrite(_pin, LOW);
 //        Serial.println("Relay on");
     } else {
-        digitalWrite(_pin, LOW);
+        digitalWrite(_pin, HIGH);
     }
 }

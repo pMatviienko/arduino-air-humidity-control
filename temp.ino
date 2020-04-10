@@ -16,8 +16,12 @@
 
 #define LCD_TIME 20;
 
-#define VENT_MAX_ON_SEC 30
-#define VENT_REST_SEC 15
+#define VENT_MAX_ON_SEC 10800
+#define VENT_REST_SEC 1200
+
+#define HEAT_MAX_ON_SEC 7200
+#define HEAT_REST_SEC 1200
+
 #define PIN_RELAY_VENT 12
 #define PIN_RELAY_HEATER 11
 
@@ -27,7 +31,7 @@ bool outerMeasureError = false;
 
 DHT dht(pinDht, DHT11);
 RelayControl ventRelay(PIN_RELAY_VENT, VENT_MAX_ON_SEC, VENT_REST_SEC);
-RelayControl heaterRelay(PIN_RELAY_HEATER, VENT_MAX_ON_SEC, VENT_REST_SEC);
+RelayControl heaterRelay(PIN_RELAY_HEATER, HEAT_MAX_ON_SEC, HEAT_REST_SEC);
 Eprom mem(EEPROM_ADDRESS);
 LiquidCrystal_I2C lcd(LCD_ADDRESS,16,2);
 Encoder encoder(pin_CLK, pin_DT, pin_BTN);
@@ -281,14 +285,14 @@ void handleEncoder(){
     if(!lcdInEditMode){
         if(encoder.isRight()){
             lcdMode = lcdMode - 1;
-            if(lcdMode > 6){
-                lcdMode = 0;
+            if(lcdMode < 0){
+                lcdMode = 6;
             }
             lcd.clear();
         } else if(encoder.isLeft()){
             lcdMode = lcdMode + 1;
-            if(lcdMode < 0){
-                lcdMode = 6;
+            if(lcdMode > 6){
+                lcdMode = 0;
             }
             lcd.clear();
         }
