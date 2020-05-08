@@ -10,10 +10,10 @@
  * @param maxOnSec
  * @param restSec
  */
-RelayControl::RelayControl(uint8_t pin, uint8_t maxOnSec, uint8_t restSec) {
+RelayControl::RelayControl(uint8_t pin, uint32_t maxOnSec, uint32_t restSec) {
     _pin = pin;
-    _maxOnSec = maxOnSec;
-    _restSec = restSec;
+    _maxOnSec = (int) maxOnSec;
+    _restSec = (int) restSec;
     _isEnabled = false;
     _isOn = false;
     _switchOnTime = 0;
