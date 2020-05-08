@@ -8,7 +8,7 @@
 
 class RelayControl {
     public:
-        RelayControl(uint8_t pin, uint8_t maxOnSec, uint8_t restSec);
+        RelayControl(uint8_t pin, uint32_t maxOnSec, uint32_t restSec);
         void enable();
         void forceOn(bool isOn);
         bool isForceOn();
@@ -20,8 +20,8 @@ class RelayControl {
 
     private:
         uint8_t _pin;
-        uint8_t _maxOnSec;
-        uint8_t _restSec;
+        int _maxOnSec;
+        int _restSec;
         unsigned long _switchOnTime;
         unsigned long _switchOffTime;
         bool _isEnabled;
